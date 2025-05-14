@@ -8,6 +8,11 @@ public class TimeManager : MonoBehaviour
 
     public PlayerStats playerStats;
     public UIManager uiManager;
+    public TeleportManager teleportManager;
+
+
+    [HideInInspector]
+    public int workHoursToday = 0;
 
     public void StartNewDay(int sleepHours, int workHours, int studyHours)
     {
@@ -23,7 +28,11 @@ public class TimeManager : MonoBehaviour
 
         currentDay++;
 
+        workHoursToday = workHours;
+
         CheckEndGame();
+
+        teleportManager.TeleportToFlat();
     }
 
     private void CheckEndGame()
@@ -53,4 +62,5 @@ public class TimeManager : MonoBehaviour
         yield return new WaitForSeconds(2f); // 2-second delay
         uiManager.planningPanel.SetActive(true);
     }
+   
 }
